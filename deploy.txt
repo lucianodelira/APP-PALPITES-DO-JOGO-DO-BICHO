@@ -1,0 +1,8 @@
+
+COMO PUBLICAR NO GITHUB PAGES
+
+1. Criar repositório no GitHub
+2. Enviar arquivos da pasta frontend
+3. Ativar GitHub Pages
+4. Abrir Settings > Pages
+5. Selecionar branch main

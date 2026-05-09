@@ -1,0 +1,66 @@
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f0f0f0;
+}
+
+.topo{
+  background:#ff6600;
+  color:white;
+  padding:20px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+#lista-palpite{
+  padding:10px;
+}
+
+.card{
+  background:white;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.animal{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.milhar{
+  color:#ff6600;
+  font-size:30px;
+  font-weight:bold;
+}
+
+.btn{
+  background:#25d366;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  width:100%;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.rodape{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#ff6600;
+  display:flex;
+  justify-content:space-around;
+  padding:12px 0;
+}
+
+.rodape button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:14px;
+}
