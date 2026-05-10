@@ -165,64 +165,82 @@ body{
 
 }
 
+/*************************************************
+ BOTÃO WHATSAPP
+*************************************************/
+
 .btn-compartilhar{
 
-  flex:1;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#25d366;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+  flex:1 !important;
 
-}
+  background:#25d366 !important;
 
-.btn-copiar{
+  color:#ffffff !important;
 
-  flex:1;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#ff6600;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+  border:none !important;
 
-}
+  border-radius:12px !important;
 
-.btn-compartilhar:hover,
-.btn-copiar:hover{
+  padding:14px !important;
 
-  opacity:0.9;
+  font-size:16px !important;
+
+  font-weight:bold !important;
+
+  cursor:pointer !important;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
 
 }
 
 /*************************************************
- TOAST
+ BOTÃO COPIAR
 *************************************************/
 
-.mensagem-copy{
+.btn-copiar{
 
-  position:fixed;
-  bottom:100px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#222;
-  color:white;
-  padding:14px 22px;
-  border-radius:12px;
-  font-size:16px;
-  opacity:0;
-  transition:0.3s;
-  z-index:99999;
+  flex:1 !important;
+
+  background:#00b894 !important;
+
+  color:#ffffff !important;
+
+  border:none !important;
+
+  border-radius:12px !important;
+
+  padding:14px !important;
+
+  font-size:16px !important;
+
+  font-weight:bold !important;
+
+  cursor:pointer !important;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
 
 }
 
-.mensagem-copy.mostrar{
+/*************************************************
+ HOVER
+*************************************************/
 
-  opacity:1;
+.btn-compartilhar:hover,
+.btn-copiar:hover{
+
+  transform:scale(1.02);
+
+  opacity:0.95;
+
+}
+
+/*************************************************
+ CLICK
+*************************************************/
+
+.btn-compartilhar:active,
+.btn-copiar:active{
+
+  transform:scale(0.98);
 
 }
