@@ -91,7 +91,7 @@ async function carregarPalpites(){
 
           <div>
             <strong>Horário:</strong>
-            ${p.horario}
+            ${pegarProximoHorario(p.loteria)}
           </div>
 
         </div>
