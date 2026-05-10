@@ -45,10 +45,6 @@ async function carregarPalpites(){
 
     lista.innerHTML = '';
 
-    // =========================================
-    // VERIFICAR
-    // =========================================
-
     if(!json.success){
 
       lista.innerHTML = `
@@ -60,15 +56,7 @@ async function carregarPalpites(){
       return;
     }
 
-    // =========================================
-    // PEGAR DADOS
-    // =========================================
-
     const palpites = json.data;
-
-    // =========================================
-    // MOSTRAR CARDS
-    // =========================================
 
     palpites.forEach(p => {
 
@@ -122,17 +110,30 @@ async function carregarPalpites(){
 
         </div>
 
-        <button
-          class="btn"
-          onclick="compartilhar(
-            '${p.animal}',
-            '${p.grupo}',
-            '${p.milhar}',
-            '${p.loteria}'
-          )"
-        >
-          Compartilhar WhatsApp
-        </button>
+        <!-- BOTÕES -->
+
+        <div class="botoes">
+
+          <button
+            class="btn-compartilhar"
+            onclick="compartilhar(
+              '${p.animal}',
+              '${p.grupo}',
+              '${p.milhar}',
+              '${p.loteria}'
+            )"
+          >
+            📲 Compartilhar
+          </button>
+
+          <button
+            class="btn-copiar"
+            onclick="copiarMilhar('${p.milhar}')"
+          >
+            📋 Copiar Milhar
+          </button>
+
+        </div>
 
       `;
 
@@ -155,7 +156,7 @@ async function carregarPalpites(){
 }
 
 /*************************************************
- WHATSAPP
+ COMPARTILHAR WHATSAPP
 *************************************************/
 
 function compartilhar(
@@ -169,13 +170,13 @@ function compartilhar(
 
 🐅 PALPITE DO DIA
 
-🎯 Animal: ${animal}
+🐾 Animal: ${animal}
 
-🏆 Grupo: ${grupo}
+🎯 Grupo: ${grupo}
 
 🔢 Milhar: ${milhar}
 
-📌 Loteria: ${loteria}
+🏆 Loteria: ${loteria}
 
 🔥 Boa sorte!
 
@@ -189,14 +190,68 @@ function compartilhar(
 }
 
 /*************************************************
- AUTO CARREGAR
+ COPIAR MILHAR
+*************************************************/
+
+function copiarMilhar(milhar){
+
+  navigator.clipboard.writeText(milhar);
+
+  mostrarMensagem(
+    `Milhar ${milhar} copiada!`
+  );
+
+}
+
+/*************************************************
+ MENSAGEM
+*************************************************/
+
+function mostrarMensagem(texto){
+
+  const msg = document.createElement('div');
+
+  msg.className = 'mensagem-copy';
+
+  msg.innerText = texto;
+
+  document.body.appendChild(msg);
+
+  setTimeout(() => {
+
+    msg.classList.add('mostrar');
+
+  },100);
+
+  setTimeout(() => {
+
+    msg.classList.remove('mostrar');
+
+    setTimeout(() => {
+
+      msg.remove();
+
+    },300);
+
+  },2500);
+
+}
+
+/*************************************************
+ INICIAR
 *************************************************/
 
 carregarPalpites();
 
 /*************************************************
- ATUALIZAR AUTOMÁTICO
+ AUTO UPDATE
 *************************************************/
+
+setInterval(() => {
+
+  carregarPalpites();
+
+},30000);
 
 setInterval(() => {
 
