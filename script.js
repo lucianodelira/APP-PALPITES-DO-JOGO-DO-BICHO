@@ -39,7 +39,9 @@ async function carregarPalpites(){
       </div>
     `;
 
-    const response = await fetch(API_URL);
+    const response = await fetch(
+  API_URL + '?t=' + new Date().getTime()
+);
 
     const json = await response.json();
 
@@ -252,9 +254,3 @@ setInterval(() => {
   carregarPalpites();
 
 },30000);
-
-setInterval(() => {
-
-  carregarPalpites();
-
-}, 30000);
