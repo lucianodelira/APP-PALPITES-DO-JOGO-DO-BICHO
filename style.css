@@ -157,3 +157,72 @@ body{
   font-weight:bold;
 
 }
+.botoes{
+
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+
+}
+
+.btn-compartilhar{
+
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#25d366;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+
+}
+
+.btn-copiar{
+
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#ff6600;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+
+}
+
+.btn-compartilhar:hover,
+.btn-copiar:hover{
+
+  opacity:0.9;
+
+}
+
+/*************************************************
+ TOAST
+*************************************************/
+
+.mensagem-copy{
+
+  position:fixed;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#222;
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  font-size:16px;
+  opacity:0;
+  transition:0.3s;
+  z-index:99999;
+
+}
+
+.mensagem-copy.mostrar{
+
+  opacity:1;
+
+}
