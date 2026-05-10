@@ -1,56 +1,132 @@
-/* style.css */
+/*************************************************
+ RESET
+*************************************************/
+
+*{
+
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+
+}
 
 body{
 
-  margin:0;
-  font-family:Arial;
-  background:#f2f2f2;
-  padding-bottom:80px;
+  font-family:
+  Arial,
+  sans-serif;
+
+  background:#f3f5f7;
+
+  color:#222;
+
+  padding-bottom:90px;
 
 }
+
+/*************************************************
+ TOPO
+*************************************************/
 
 .topo{
 
-  background:#ff6600;
-  color:white;
-  padding:20px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
   position:sticky;
+
   top:0;
+
   z-index:999;
 
+  background:
+  linear-gradient(
+    135deg,
+    #ff6600,
+    #ff8533
+  );
+
+  padding:16px;
+
+  text-align:center;
+
+  color:white;
+
+  box-shadow:
+  0 2px 10px rgba(0,0,0,0.15);
+
 }
+
+.topo h1{
+
+  font-size:22px;
+
+  font-weight:700;
+
+}
+
+#data-hora{
+
+  margin-top:6px;
+
+  font-size:13px;
+
+  opacity:0.95;
+
+}
+
+/*************************************************
+ LISTA
+*************************************************/
 
 #lista-palpite{
 
   padding:12px;
 
+  max-width:700px;
+
+  margin:auto;
+
 }
+
+/*************************************************
+ CARD
+*************************************************/
 
 .card{
 
   background:white;
+
   border-radius:18px;
-  padding:18px;
+
+  padding:14px;
+
   margin-bottom:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+  box-shadow:
+  0 3px 12px rgba(0,0,0,0.08);
+
+  border:1px solid #ececec;
 
 }
+
+/*************************************************
+ TOPO CARD
+*************************************************/
 
 .top-card{
 
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 
 }
 
 .animal{
 
-  font-size:24px;
-  font-weight:bold;
+  font-size:18px;
+
+  font-weight:700;
+
   color:#222;
 
 }
@@ -58,125 +134,135 @@ body{
 .grupo{
 
   background:#ff6600;
+
   color:white;
-  padding:6px 12px;
-  border-radius:10px;
-  font-size:14px;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  padding:5px 10px;
+
+  border-radius:30px;
 
 }
+
+/*************************************************
+ LINHA
+*************************************************/
 
 .linha{
 
   height:1px;
-  background:#ddd;
-  margin:14px 0;
+
+  background:#ededed;
+
+  margin:12px 0;
 
 }
+
+/*************************************************
+ INFO
+*************************************************/
 
 .info{
 
-  color:#444;
-  line-height:28px;
-  font-size:16px;
+  font-size:14px;
 
-}
-
-.milhar{
-
-  text-align:center;
-  font-size:42px;
-  color:#ff6600;
-  font-weight:bold;
-  margin-top:15px;
-
-}
-
-.numeros{
-
-  display:flex;
-  justify-content:space-around;
-  margin-top:15px;
-  font-size:15px;
   color:#555;
 
-}
-
-.btn{
-
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:#25d366;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+  line-height:24px;
 
 }
 
-.btn:hover{
+/*************************************************
+ LISTA MILHARES
+*************************************************/
 
-  opacity:0.9;
+.lista-milhares{
+
+  margin-top:14px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:10px;
 
 }
 
-.loading,
-.erro{
+/*************************************************
+ CARD MILHAR
+*************************************************/
 
-  background:white;
-  padding:20px;
-  border-radius:12px;
+.milhar-card{
+
+  background:#fafafa;
+
+  border-radius:14px;
+
+  padding:10px;
+
+  border:1px solid #ececec;
+
   text-align:center;
-  margin-top:20px;
-  font-size:18px;
+
+  transition:0.2s;
 
 }
 
-.rodape{
+.milhar-card:hover{
 
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#ff6600;
-  display:flex;
-  justify-content:space-around;
-  padding:14px 0;
-  z-index:999;
-
-}
-
-.rodape button{
-
-  background:none;
-  border:none;
-  color:white;
-  font-size:14px;
-  font-weight:bold;
-
-}
-.botoes{
-
-  display:flex;
-  gap:10px;
-  margin-top:18px;
+  transform:translateY(-2px);
 
 }
 
 /*************************************************
- BOTÃO WHATSAPP
+ NÚMERO MILHAR
 *************************************************/
+
+.milhar-numero{
+
+  font-size:24px;
+
+  font-weight:800;
+
+  color:#ff6600;
+
+  letter-spacing:1px;
+
+}
+
 /*************************************************
- BOTÕES VERDES
+ INFO MILHAR
+*************************************************/
+
+.milhar-info{
+
+  margin-top:5px;
+
+  font-size:11px;
+
+  color:#666;
+
+  display:flex;
+
+  justify-content:space-between;
+
+}
+
+/*************************************************
+ BOTÕES
 *************************************************/
 
 .botoes{
 
   display:flex;
-  gap:10px;
-  margin-top:18px;
+
+  gap:8px;
+
+  margin-top:14px;
 
 }
 
@@ -188,23 +274,23 @@ body{
 
   flex:1;
 
-  background:#25d366 !important;
+  border:none;
 
-  color:#ffffff !important;
+  border-radius:10px;
 
-  border:none !important;
+  background:#25d366;
 
-  border-radius:12px;
+  color:white;
 
-  padding:14px;
+  font-size:13px;
 
-  font-size:16px;
+  font-weight:700;
 
-  font-weight:bold;
+  padding:10px;
 
   cursor:pointer;
 
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  transition:0.2s;
 
 }
 
@@ -216,23 +302,23 @@ body{
 
   flex:1;
 
-  background:#25d366 !important;
+  border:none;
 
-  color:#ffffff !important;
+  border-radius:10px;
 
-  border:none !important;
+  background:#1faa59;
 
-  border-radius:12px;
+  color:white;
 
-  padding:14px;
+  font-size:13px;
 
-  font-size:16px;
+  font-weight:700;
 
-  font-weight:bold;
+  padding:10px;
 
   cursor:pointer;
 
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  transition:0.2s;
 
 }
 
@@ -243,7 +329,7 @@ body{
 .btn-compartilhar:hover,
 .btn-copiar:hover{
 
-  opacity:0.9;
+  opacity:0.92;
 
   transform:scale(1.02);
 
@@ -259,22 +345,180 @@ body{
   transform:scale(0.98);
 
 }
+
 /*************************************************
- DATA E HORA
+ LOADING / ERRO
 *************************************************/
 
-#data-hora{
+.loading,
+.erro{
 
-  margin-top:10px;
+  background:white;
 
-  font-size:16px;
+  padding:20px;
 
-  font-weight:bold;
-
-  color:white;
+  border-radius:14px;
 
   text-align:center;
 
-  opacity:0.95;
+  font-size:15px;
+
+  box-shadow:
+  0 2px 10px rgba(0,0,0,0.08);
+
+}
+
+/*************************************************
+ RODAPÉ
+*************************************************/
+
+.rodape{
+
+  position:fixed;
+
+  bottom:0;
+
+  left:0;
+
+  width:100%;
+
+  background:white;
+
+  border-top:
+  1px solid #e5e5e5;
+
+  display:flex;
+
+  justify-content:space-around;
+
+  align-items:center;
+
+  padding:10px 0;
+
+  z-index:999;
+
+  box-shadow:
+  0 -2px 10px rgba(0,0,0,0.05);
+
+}
+
+.rodape button{
+
+  border:none;
+
+  background:none;
+
+  color:#ff6600;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+/*************************************************
+ TOAST
+*************************************************/
+
+.mensagem-copy{
+
+  position:fixed;
+
+  bottom:100px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:#222;
+
+  color:white;
+
+  padding:12px 18px;
+
+  border-radius:12px;
+
+  font-size:14px;
+
+  opacity:0;
+
+  transition:0.3s;
+
+  z-index:99999;
+
+}
+
+.mensagem-copy.mostrar{
+
+  opacity:1;
+
+}
+
+/*************************************************
+ RESPONSIVO
+*************************************************/
+
+@media(max-width:600px){
+
+  .lista-milhares{
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+  }
+
+  .milhar-numero{
+
+    font-size:20px;
+
+  }
+
+  .animal{
+
+    font-size:16px;
+
+  }
+
+  .btn-compartilhar,
+  .btn-copiar{
+
+    font-size:12px;
+
+    padding:9px;
+
+  }
+
+}
+
+@media(max-width:420px){
+
+  .lista-milhares{
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:8px;
+
+  }
+
+  .milhar-card{
+
+    padding:8px;
+
+  }
+
+  .milhar-numero{
+
+    font-size:18px;
+
+  }
+
+  .info{
+
+    font-size:13px;
+
+  }
 
 }

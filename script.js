@@ -4,26 +4,15 @@
  URL DO GOOGLE APPS SCRIPT
 *************************************************/
 
-/*
-PUBLIQUE O APPS SCRIPT COMO:
-
-Implantar
-→ Nova implantação
-→ Aplicativo da Web
-
-Permissões:
-Qualquer pessoa
-
-Depois cole a URL abaixo
-*/
-
-const API_URL = 'https://script.google.com/macros/s/AKfycbwbBpn8ye9dxT18WY0b_Vh2ZuaEGFWFVzmsAYrdT3uFAsf26cnQoYBy0aBDY1seK04ytg/exec';
+const API_URL =
+'https://script.google.com/macros/s/AKfycbwbBpn8ye9dxT18WY0b_Vh2ZuaEGFWFVzmsAYrdT3uFAsf26cnQoYBy0aBDY1seK04ytg/exec';
 
 /*************************************************
  LISTA
 *************************************************/
 
-const lista = document.getElementById('lista-palpite');
+const lista =
+document.getElementById('lista-palpite');
 
 /*************************************************
  CARREGAR PALPITES
@@ -40,8 +29,8 @@ async function carregarPalpites(){
     `;
 
     const response = await fetch(
-  API_URL + '?t=' + new Date().getTime()
-);
+      API_URL + '?t=' + new Date().getTime()
+    );
 
     const json = await response.json();
 
@@ -56,13 +45,15 @@ async function carregarPalpites(){
       `;
 
       return;
+
     }
 
     const palpites = json.data;
 
     palpites.forEach(p => {
 
-      const card = document.createElement('div');
+      const card =
+      document.createElement('div');
 
       card.className = 'card';
 
@@ -90,25 +81,37 @@ async function carregarPalpites(){
           </div>
 
           <div>
-            <strong>Horário:</strong>
+            <strong>Próxima Extração:</strong>
             ${pegarProximoHorario(p.loteria)}
           </div>
 
         </div>
 
-        <div class="milhar">
-          ${p.milhar}
-        </div>
+        <div class="lista-milhares">
 
-        <div class="numeros">
+          ${p.milhares.map((m,index) => `
 
-          <span>
-            Centena ${p.centena}
-          </span>
+            <div class="milhar-card">
 
-          <span>
-            Dezena ${p.dezena}
-          </span>
+              <div class="milhar-numero">
+                ${m.milhar}
+              </div>
+
+              <div class="milhar-info">
+
+                <span>
+                  ${index + 1}° Palpite
+                </span>
+
+                <span>
+                  Dezena ${m.dezena}
+                </span>
+
+              </div>
+
+            </div>
+
+          `).join('')}
 
         </div>
 
@@ -116,24 +119,22 @@ async function carregarPalpites(){
 
         <div class="botoes">
 
+          <!-- COMPARTILHAR -->
+
           <button
             class="btn-compartilhar"
-            onclick="compartilhar(
-              '${p.animal}',
-              '${p.grupo}',
-              '${p.milhar}',
-              '${p.loteria}'
-            )"
+            onclick='compartilhar(${JSON.stringify(p)})'
           >
             📲 Compartilhar
           </button>
 
+          <!-- COPIAR -->
+
           <button
             class="btn-copiar"
-            onclick="copiarMilhar('${p.milhar}')"
+            onclick='copiarMilhar(${JSON.stringify(p)})'
           >
-            📋 Copiar Milhar
-          </button>
+            📋 Copiar          </button>
 
         </div>
 
@@ -158,72 +159,82 @@ async function carregarPalpites(){
 }
 
 /*************************************************
- /*************************************************
- COMPARTILHAR WHATSAPP
+ COMPARTILHAR 5 MILHARES
 *************************************************/
 
-function compartilhar(
-  animal,
-  grupo,
-  milhar,
-  loteria
-){
+/*************************************************
+ COMPARTILHAR FORMATO PROFISSIONAL
+*************************************************/
+
+function compartilhar(p){
 
   // =========================================
-  // DATA E HORA ATUAL
+  // DATA E HORA
   // =========================================
 
   const agora = new Date();
 
-  const data = agora.toLocaleDateString(
-    'pt-BR'
-  );
+  const data =
+    agora.toLocaleDateString('pt-BR');
 
-  const hora = agora.toLocaleTimeString(
-    'pt-BR',
-    {
-      hour:'2-digit',
-      minute:'2-digit'
-    }
-  );
+  const hora =
+    agora.toLocaleTimeString(
+      'pt-BR',
+      {
+        hour:'2-digit',
+        minute:'2-digit'
+      }
+    );
 
   // =========================================
-  // PRÓXIMO HORÁRIO DA EXTRAÇÃO
+  // PRÓXIMO HORÁRIO
   // =========================================
 
   const proximoHorario =
-    pegarProximoHorario(loteria);
+    pegarProximoHorario(
+      p.loteria
+    );
+
+  // =========================================
+  // LISTA DAS MILHARES
+  // =========================================
+
+  const listaMilhares =
+    p.milhares
+      .map(m => m.milhar)
+      .join('\n');
 
   // =========================================
   // TEXTO WHATSAPP
   // =========================================
 
-  const texto = `
-
-🐅 PALPITE DO DIA
+  const texto = `🐅 PALPITE DO DIA
 
 📅 Data: ${data}
 
 ⏰ Horário: ${hora}
 
+🏆 Loteria: ${p.loteria}
+
 🎯 Próxima Extração: ${proximoHorario}
 
-🐾 Animal: ${animal}
+🐾 Animal: ${p.animal}
 
-🎯 Grupo: ${grupo}
+🎯 Grupo: ${p.grupo}
 
-🔢 Milhar: ${milhar}
+📌 PALPITES
+----------------------------------
 
-🏆 Loteria: ${loteria}
+🔢 Milhar:
+
+${listaMilhares}
 
 🔥 Boa sorte!
 
-🌐 www.zepitaco.com
-
-`;
+🌐 www.zepitaco.com`;
 
   // =========================================
-  // URL WHATSAPP
+  // ABRIR WHATSAPP
   // =========================================
 
   const url =
@@ -232,29 +243,50 @@ function compartilhar(
   window.open(url,'_blank');
 
 }
+
 /*************************************************
- COPIAR MILHAR
+ COPIAR SOMENTE AS 5 MILHARES
 *************************************************/
 
-function copiarMilhar(milhar){
+function copiarMilhar(p){
 
-  navigator.clipboard.writeText(milhar);
+  // =========================================
+  // PEGAR AS 5 MILHARES
+  // =========================================
+
+  const milhares = p.milhares
+    .map(m => m.milhar)
+    .join(', ');
+
+  // =========================================
+  // COPIAR
+  // =========================================
+
+  navigator.clipboard.writeText(
+    milhares
+  );
+
+  // =========================================
+  // MENSAGEM
+  // =========================================
 
   mostrarMensagem(
-    `Milhar ${milhar} copiada!`
+    '5 milhares copiadas!'
   );
 
 }
 
 /*************************************************
- MENSAGEM
+ TOAST
 *************************************************/
 
 function mostrarMensagem(texto){
 
-  const msg = document.createElement('div');
+  const msg =
+  document.createElement('div');
 
-  msg.className = 'mensagem-copy';
+  msg.className =
+  'mensagem-copy';
 
   msg.innerText = texto;
 
@@ -281,33 +313,23 @@ function mostrarMensagem(texto){
 }
 
 /*************************************************
- INICIAR
-*************************************************/
-
-carregarPalpites();
-
-/*************************************************
- AUTO UPDATE
-*************************************************/
-
-setInterval(() => {
-
-  carregarPalpites();
-
-},30000);
-/*************************************************
  DATA E HORA
 *************************************************/
 
-const dataHora = document.getElementById('data-hora');
+const dataHora =
+document.getElementById('data-hora');
 
 function atualizarDataHora(){
 
+  if(!dataHora) return;
+
   const agora = new Date();
 
-  const data = agora.toLocaleDateString('pt-BR');
+  const data =
+  agora.toLocaleDateString('pt-BR');
 
-  const hora = agora.toLocaleTimeString('pt-BR');
+  const hora =
+  agora.toLocaleTimeString('pt-BR');
 
   dataHora.innerHTML = `
     📅 ${data} ⏰ ${hora}
@@ -316,27 +338,7 @@ function atualizarDataHora(){
 }
 
 /*************************************************
- INICIAR
-*************************************************/
-
-atualizarDataHora();
-
-/*************************************************
- ATUALIZAR A CADA 1 SEGUNDO
-*************************************************/
-
-setInterval(() => {
-
-  atualizarDataHora();
-
-},1000);
-
-
-
-
-
-/*************************************************
- HORÁRIOS DAS LOTERIAS
+ HORÁRIOS LOTERIAS
 *************************************************/
 
 const HORARIOS_LOTERIAS = {
@@ -386,31 +388,30 @@ const HORARIOS_LOTERIAS = {
 function pegarProximoHorario(nomeLoteria){
 
   const horarios =
-    HORARIOS_LOTERIAS[nomeLoteria];
+  HORARIOS_LOTERIAS[nomeLoteria];
 
   if(!horarios) return '--:--';
 
   const agora = new Date();
 
   const horaAtual =
+
     agora.getHours() * 60 +
     agora.getMinutes();
 
-  // =========================================
-  // PROCURAR PRÓXIMO HORÁRIO
-  // =========================================
-
   for(let horario of horarios){
 
-    const partes = horario.split(':');
+    const partes =
+    horario.split(':');
 
-    const hora = parseInt(partes[0]);
+    const hora =
+    parseInt(partes[0]);
 
-    const minuto = parseInt(partes[1]);
+    const minuto =
+    parseInt(partes[1]);
 
-    const total = (hora * 60) + minuto;
-
-    // SE AINDA NÃO PASSOU
+    const total =
+    (hora * 60) + minuto;
 
     if(total > horaAtual){
 
@@ -420,11 +421,134 @@ function pegarProximoHorario(nomeLoteria){
 
   }
 
-  // =========================================
-  // SE TODOS PASSARAM
-  // VOLTA PARA PRIMEIRO HORÁRIO DO DIA SEGUINTE
-  // =========================================
-
   return horarios[0];
 
 }
+
+/*************************************************
+ INICIAR
+*************************************************/
+
+carregarPalpites();
+
+atualizarDataHora();
+
+/*************************************************
+ AUTO UPDATE
+*************************************************/
+
+/*************************************************
+ AUTO ATUALIZAÇÃO POR HORÁRIO
+*************************************************/
+
+// GUARDA O ÚLTIMO HORÁRIO
+
+let ultimoHorarioGlobal = '';
+
+/*************************************************
+ PEGAR HORÁRIO ATUAL
+*************************************************/
+
+function pegarHorarioAtual(){
+
+  const agora = new Date();
+
+  return (
+    agora.getHours()
+    .toString()
+    .padStart(2,'0')
+
+    +
+
+    ':'
+
+    +
+
+    agora.getMinutes()
+    .toString()
+    .padStart(2,'0')
+  );
+
+}
+
+/*************************************************
+ VERIFICAR MUDANÇA DE EXTRAÇÃO
+*************************************************/
+
+function verificarMudancaHorario(){
+
+  // =========================================
+  // PEGAR TODOS HORÁRIOS
+  // =========================================
+
+  let horarios = [];
+
+  Object.values(HORARIOS_LOTERIAS)
+  .forEach(lista => {
+
+    lista.forEach(h => {
+
+      horarios.push(h);
+
+    });
+
+  });
+
+  // REMOVE DUPLICADOS
+
+  horarios =
+  [...new Set(horarios)];
+
+  // =========================================
+  // HORÁRIO ATUAL
+  // =========================================
+
+  const horarioAtual =
+  pegarHorarioAtual();
+
+  // =========================================
+  // SE PASSOU DE UM HORÁRIO
+  // =========================================
+
+  if(
+    horarios.includes(horarioAtual)
+    &&
+    ultimoHorarioGlobal !== horarioAtual
+  ){
+
+    ultimoHorarioGlobal =
+    horarioAtual;
+
+    console.log(
+      'Atualizando palpites:',
+      horarioAtual
+    );
+
+    carregarPalpites();
+
+    mostrarMensagem(
+      '🔥 Novos palpites liberados!'
+    );
+
+  }
+
+}
+
+/*************************************************
+ VERIFICAR A CADA 20 SEGUNDOS
+*************************************************/
+
+setInterval(() => {
+
+  verificarMudancaHorario();
+
+},20000);
+/*************************************************
+ RELÓGIO
+*************************************************/
+
+setInterval(() => {
+
+  atualizarDataHora();
+
+},1000);
