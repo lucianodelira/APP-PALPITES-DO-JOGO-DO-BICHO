@@ -289,3 +289,101 @@ setInterval(() => {
   atualizarDataHora();
 
 },1000);
+
+
+
+
+
+/*************************************************
+ HORÁRIOS DAS LOTERIAS
+*************************************************/
+
+const HORARIOS_LOTERIAS = {
+
+  'RIO/FEDERAL': [
+    '11:00',
+    '14:00',
+    '16:00',
+    '18:00',
+    '21:00'
+  ],
+
+  'LOTEP': [
+    '13:00',
+    '16:00',
+    '19:00'
+  ],
+
+  'BAHIA': [
+    '10:00',
+    '12:00',
+    '15:00',
+    '19:00'
+  ],
+
+  'NACIONAL': [
+    '18:00'
+  ],
+
+  'LOOK/GOIAS': [
+    '19:00'
+  ],
+
+  'SAO-PAULO': [
+    '14:00',
+    '16:00',
+    '18:00',
+    '21:00'
+  ]
+
+};
+
+/*************************************************
+ PEGAR PRÓXIMO HORÁRIO
+*************************************************/
+
+function pegarProximoHorario(nomeLoteria){
+
+  const horarios =
+    HORARIOS_LOTERIAS[nomeLoteria];
+
+  if(!horarios) return '--:--';
+
+  const agora = new Date();
+
+  const horaAtual =
+    agora.getHours() * 60 +
+    agora.getMinutes();
+
+  // =========================================
+  // PROCURAR PRÓXIMO HORÁRIO
+  // =========================================
+
+  for(let horario of horarios){
+
+    const partes = horario.split(':');
+
+    const hora = parseInt(partes[0]);
+
+    const minuto = parseInt(partes[1]);
+
+    const total = (hora * 60) + minuto;
+
+    // SE AINDA NÃO PASSOU
+
+    if(total > horaAtual){
+
+      return horario;
+
+    }
+
+  }
+
+  // =========================================
+  // SE TODOS PASSARAM
+  // VOLTA PARA PRIMEIRO HORÁRIO DO DIA SEGUINTE
+  // =========================================
+
+  return horarios[0];
+
+}
