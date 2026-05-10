@@ -254,3 +254,38 @@ setInterval(() => {
   carregarPalpites();
 
 },30000);
+/*************************************************
+ DATA E HORA
+*************************************************/
+
+const dataHora = document.getElementById('data-hora');
+
+function atualizarDataHora(){
+
+  const agora = new Date();
+
+  const data = agora.toLocaleDateString('pt-BR');
+
+  const hora = agora.toLocaleTimeString('pt-BR');
+
+  dataHora.innerHTML = `
+    📅 ${data} ⏰ ${hora}
+  `;
+
+}
+
+/*************************************************
+ INICIAR
+*************************************************/
+
+atualizarDataHora();
+
+/*************************************************
+ ATUALIZAR A CADA 1 SEGUNDO
+*************************************************/
+
+setInterval(() => {
+
+  atualizarDataHora();
+
+},1000);
