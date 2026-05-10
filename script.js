@@ -171,30 +171,52 @@ async function carregarPalpites(){
  COMPARTILHAR
 *************************************************/
 
+/*************************************************
+ COMPARTILHAR
+*************************************************/
+
 function compartilhar(p){
 
-  const listaMilhares =
+  const agora = new Date();
 
+  const data =
+    agora.toLocaleDateString('pt-BR');
+
+  const hora =
+    agora.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+  const listaMilhares =
     p.milhares
       .map(m => m.milhar)
       .join('\n');
 
-  const texto = `🐅 PALPITE DO DIA
+  const texto = `📅 Data: ${data}
 
-🏆 ${p.loteria}
+🕒 Horário: ${hora}
 
-⏰ ${p.horario}
+🎰 Loteria: ${p.loteria}
 
-🐾 ${p.animal}
+⏳ Próxima Extração: ${p.horario}
 
-🎯 Grupo ${p.grupo}
+🐾 Animal: ${p.animal}
+
+🎯 Grupo: ${p.grupo}
+
+🔥 PALPITES
+----------------------------------
+
+💎 Milhar:
 
 ${listaMilhares}
+
+🍀 Boa sorte!
 
 🌐 www.zepitaco.com`;
 
   const url =
-
     `https://wa.me/?text=${encodeURIComponent(texto)}`;
 
   window.open(
