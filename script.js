@@ -95,7 +95,7 @@ async function carregarPalpites(){
           </div>
 
           <div>
-            <strong>Horário:</strong>
+            <strong>Próximo Sorteio:</strong>
             ${p.horario}
           </div>
 
@@ -166,10 +166,6 @@ async function carregarPalpites(){
   }
 
 }
-
-/*************************************************
- COMPARTILHAR
-*************************************************/
 
 /*************************************************
  COMPARTILHAR
@@ -331,7 +327,7 @@ setInterval(() => {
 },1000);
 
 /*************************************************
- ATUALIZAR SOMENTE VISUAL
+ ATUALIZAR PALPITES
 *************************************************/
 
 setInterval(() => {
