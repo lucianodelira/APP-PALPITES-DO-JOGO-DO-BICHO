@@ -158,6 +158,7 @@ async function carregarPalpites(){
 }
 
 /*************************************************
+ /*************************************************
  COMPARTILHAR WHATSAPP
 *************************************************/
 
@@ -168,9 +169,44 @@ function compartilhar(
   loteria
 ){
 
+  // =========================================
+  // DATA E HORA ATUAL
+  // =========================================
+
+  const agora = new Date();
+
+  const data = agora.toLocaleDateString(
+    'pt-BR'
+  );
+
+  const hora = agora.toLocaleTimeString(
+    'pt-BR',
+    {
+      hour:'2-digit',
+      minute:'2-digit'
+    }
+  );
+
+  // =========================================
+  // PRÓXIMO HORÁRIO DA EXTRAÇÃO
+  // =========================================
+
+  const proximoHorario =
+    pegarProximoHorario(loteria);
+
+  // =========================================
+  // TEXTO WHATSAPP
+  // =========================================
+
   const texto = `
 
 🐅 PALPITE DO DIA
+
+📅 Data: ${data}
+
+⏰ Horário: ${hora}
+
+🎯 Próxima Extração: ${proximoHorario}
 
 🐾 Animal: ${animal}
 
@@ -182,7 +218,13 @@ function compartilhar(
 
 🔥 Boa sorte!
 
+🌐 www.zepitaco.com
+
 `;
+
+  // =========================================
+  // URL WHATSAPP
+  // =========================================
 
   const url =
     `https://wa.me/?text=${encodeURIComponent(texto)}`;
@@ -190,7 +232,6 @@ function compartilhar(
   window.open(url,'_blank');
 
 }
-
 /*************************************************
  COPIAR MILHAR
 *************************************************/
